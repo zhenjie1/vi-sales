@@ -4,6 +4,7 @@ const { t } = useI18n()
 
 <template>
   <div>
+    404 页面的内容
     {{ t('not-found') }}
   </div>
 </template>

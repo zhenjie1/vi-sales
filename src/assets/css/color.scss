@@ -1,0 +1,13 @@
+body{
+    --main: #1890ff;
+    --mainTrans: rgba(24, 144, 255, .1);
+
+    --border: #e6e6e6;
+
+    --bgHover: rgba(0, 0, 0, 0.04);
+
+    --gray: #666;
+    --red: #e33232;
+
+    .red{color: var(--red);}
+}
