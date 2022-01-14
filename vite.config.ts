@@ -152,7 +152,7 @@ export default defineConfig({
     proxy: {
       // 正则表达式写法
       '^/api/.*': {
-        target: 'https://api.apiopen.top',
+        target: 'http://f5321.free.svipss.top',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },

@@ -17,6 +17,7 @@ const leftMenu = reactive([
   { title: '我的账户', icon: 'icon-account', path: '/user' },
   { title: '用户列表', icon: 'icon-userList', path: '/userList' },
   { title: '订单记录', icon: 'icon-order', path: '/orderRecord' },
+  { title: '', icon: '', path: '/' },
 ])
 </script>
 

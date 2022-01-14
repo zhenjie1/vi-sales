@@ -22,7 +22,7 @@ export default function defaultParams(params?: Params) {
 
   params.url = `${ajaxPath()}${url}`
 
-  params.dataPath = params.dataPath || 'result'
+  params.dataPath = params.dataPath || 'data'
   params.method = (params.method || 'post').toLocaleUpperCase() as any
   params.isCode = params.isCode || true
   params.exclude = params.exclude || apiInvalidValue

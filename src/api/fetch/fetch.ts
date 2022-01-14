@@ -15,7 +15,7 @@ type Fail<T> = (error: AxiosError<T>) => void
  */
 export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
   const response = shallowRef<AxiosResponse<T>>()
-  const sourceData = shallowRef<FetchResult<T>>()
+  const sourceData = ref<FetchResult<T>>()
   const data = computed<T>(() => getData(config, sourceData.value))
   const isFinished = ref(false)
   const isLoading = ref(true)
@@ -34,6 +34,14 @@ export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
     isFinished.value = false
   }
 
+  let resolve: Success<T>
+  let reject: Fail<T>
+  // eslint-disable-next-line promise/param-names
+  const promise = new Promise<T>((res, rej) => {
+    resolve = res
+    reject = rej
+  })
+
   const result: APIFetchReturn<T> = {
     response,
     sourceData,
@@ -47,6 +55,7 @@ export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
     isLoading,
     cancel: abort,
     canceled: aborted,
+    promise,
     aborted,
     abort,
     start,
@@ -57,19 +66,21 @@ export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
   readCache(config, result)
 
   function start(params?: any): APIFetchReturn<T> {
-    config.data = removeSurplusData(params)
+    config.data = removeSurplusData(params) || config.data
     axios({ ...config, cancelToken: cancelToken.token })
       .then((r: any) => {
         response.value = r
         sourceData.value = r.data
+        resolve(data.value)
 
-        if (r.data.code !== 200)
+        if (r.data.code !== 100000)
           failPool.map(fn => fn(r))
         else
           successPool.map(fn => fn(data.value!))
       })
       .catch((e: any) => {
         error.value = e
+        reject(e)
         failPool.map(fn => fn(e))
       })
       .finally(() => {
