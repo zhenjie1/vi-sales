@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import Icons from 'unplugin-icons/vite'
@@ -28,6 +29,7 @@ export default defineConfig({
     Vue({
       include: [/\.vue$/, /\.md$/],
     }),
+    vueJsx({}),
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
@@ -150,7 +152,7 @@ export default defineConfig({
     proxy: {
       // 正则表达式写法
       '^/api/.*': {
-        target: 'https://api.apiopen.top',
+        target: 'http://f5321.free.svipss.top',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },

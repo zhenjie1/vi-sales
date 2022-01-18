@@ -31,6 +31,7 @@ export type APIFetchReturn<T> = UseAxiosReturn<T> & {
   sourceData: ShallowRef<FetchResult<T> | undefined>
   success: (cb: SuccessFn<T>) => void
   fail: (error: FailFn<T>) => void
+  promise: Promise<T>
 
   [key: string]: any
 }
