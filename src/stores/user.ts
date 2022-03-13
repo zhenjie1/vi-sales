@@ -2,9 +2,12 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
   /**
-   * Current named of the user.
+   * 用户信息
    */
   const info = ref({})
+  /**
+   * token
+   */
   const token = ref('')
 
   /**

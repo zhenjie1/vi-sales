@@ -14,6 +14,7 @@ export const login = () => useAxios({
   url: '/userLogin',
 })
 
+// 登录 telegrem
 export const loginTelegram = () => useAxios<{
   User: Date
   token: string

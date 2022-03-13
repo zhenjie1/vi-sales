@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { api } from './api'
 import { loginTelegram } from './api/login'
 import { useUserStore } from './stores/user'
 
@@ -14,6 +15,7 @@ const user = useUserStore()
 loginTelegram().start().promise.then((res) => {
   user.setToken(res.token)
   user.setInfo(res.User)
+  api.telegram.get().start()
 })
 </script>
 

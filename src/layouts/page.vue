@@ -1,11 +1,11 @@
 <template>
   <a-layout class="h-full">
     <a-layout-header class="h-16 border-gray-100 border-b">
-      <layout-header />
+      <!-- <layout-header /> -->
     </a-layout-header>
     <a-layout>
       <a-layout-sider>
-        <layout-left-menu />
+        <!-- <layout-left-menu /> -->
       </a-layout-sider>
       <a-layout-content class="p-3 overflow-y-auto">
         <router-view />

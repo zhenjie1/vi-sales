@@ -1,5 +1,6 @@
 import type { Params, Config } from './utils'
 import { ajaxPath } from './url'
+import { useUserStore } from '~/stores/user'
 
 /**
  * - 发请求前认为无效的值
@@ -12,9 +13,10 @@ export const apiInvalidValue = [null, undefined, '']
  */
 export default function defaultParams(params?: Params) {
   if (!params) throw new Error('参数异常！')
+  const { token } = useUserStore()
 
   // headers 处理
-  const headers: Data = { token: 'this is at headers' }
+  const headers: Data = { accessToken: token }
   if (params.file) headers['Content-Type'] = 'application/json;charset=UTF-8'
   params.headers = headers
 
