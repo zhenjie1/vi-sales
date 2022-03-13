@@ -26,6 +26,12 @@ export const useUserStore = defineStore('user', () => {
     token,
     setInfo,
     setToken,
+    persist: {
+      key: 'storekey',
+      storage: window.sessionStorage,
+      paths: ['nested.data'],
+      overwrite: true,
+    },
   }
 })
 

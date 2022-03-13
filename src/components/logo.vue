@@ -2,7 +2,7 @@
   <div class="logo flex h-full items-center px-2">
     <icon-wechat class="mr-2 text-3xl !text-$main" />
     <p class="text-lg text-$main">
-      授权中心
+      logo
     </p>
   </div>
 </template>

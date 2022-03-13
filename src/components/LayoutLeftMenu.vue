@@ -8,17 +8,58 @@
         </router-link>
       </li>
     </ul>
+    {{ renderMenu }}
   </div>
 </template>
 
 <script lang="ts" setup>
 
-const leftMenu = reactive([
-  { title: '我的账户', icon: 'icon-account', path: '/user' },
-  { title: '用户列表', icon: 'icon-userList', path: '/userList' },
-  { title: '订单记录', icon: 'icon-order', path: '/orderRecord' },
-  { title: '', icon: '', path: '/' },
+type Menu = {
+  title: string
+  path: string
+  icon?: string
+  children?: Menu[]
+}
+const leftMenu = reactive<Menu[]>([
+  {
+    title: '我的群',
+    icon: 'icon-account',
+    path: '/myGroup',
+    children: [
+      { title: '总计', path: 'total', icon: 'icon-account' },
+      { title: '数据统计', path: 'statistics', icon: 'icon-account' },
+      { title: '消息', path: 'message', icon: 'icon-account' },
+      { title: '成员管理', path: 'member', icon: 'icon-account' },
+      { title: '新人培育', path: 'cultivation', icon: 'icon-account' },
+      { title: '打卡机', path: 'PunchInMachine', icon: 'icon-account' },
+      { title: '智能应答', path: 'answer', icon: 'icon-account' },
+      { title: '定时公告', path: 'timeNotice', icon: 'icon-account' },
+      { title: '安全防护', path: 'safetyProtection', icon: 'icon-account' },
+      { title: '禁言模式', path: 'noWords', icon: 'icon-account' },
+      { title: '添加我管理的群', path: 'noWords', icon: 'icon-account' },
+    ],
+  },
+  {
+    title: '我的机器人',
+    icon: 'icon-userList',
+    path: '/myBot',
+    children: [
+      { title: '总览', path: 'total', icon: 'icon-account' },
+      { title: '欢迎语', path: 'welcome', icon: 'icon-account' },
+      { title: '智能应答', path: 'answer', icon: 'icon-account' },
+    ],
+  },
+  { title: '任务队列', icon: 'icon-order', path: '/task' },
+  { title: '订单', icon: 'icon-order', path: '/orderRecord' },
+  { title: '呼叫客服', icon: 'icon-order', path: '/customer' },
+  { title: '中文简体', icon: 'icon-order', path: '/lang' },
 ])
+
+const renderMenu = computed(() => {
+  const route = useRoute()
+  console.log('route', route)
+  return ''
+})
 </script>
 
 <style lang="scss" scoped>
