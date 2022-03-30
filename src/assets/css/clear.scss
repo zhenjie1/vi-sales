@@ -1,0 +1,14 @@
+body{
+    --space: 12px;
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+img{display: block;}
+
+.arco-table-th-item-title{white-space: nowrap;}
+.arco-table-cell{color: rgba(0,0,0,.7);}
+.arco-form-item-layout-inline{
+    margin-right: var(--space) !important;
+    margin-bottom: var(--space) !important;
+}

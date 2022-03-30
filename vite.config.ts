@@ -1,11 +1,13 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
+// import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-md'
 import WindiCSS from 'vite-plugin-windicss'
@@ -27,6 +29,7 @@ export default defineConfig({
     Vue({
       include: [/\.vue$/, /\.md$/],
     }),
+    vueJsx({}),
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
@@ -42,6 +45,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vue-i18n',
+        'pinia',
         '@vueuse/head',
         '@vueuse/core',
       ],
@@ -58,6 +62,7 @@ export default defineConfig({
 
       // custom resolvers
       resolvers: [
+        // AntDesignVueResolver(),
         // auto import icons
         // https://github.com/antfu/unplugin-icons
         IconsResolver({
@@ -86,9 +91,7 @@ export default defineConfig({
       headEnabled: true,
       markdownItSetup(md) {
         // https://prismjs.com/
-        // @ts-expect-error types mismatch
         md.use(Prism)
-        // @ts-expect-error types mismatch
         md.use(LinkAttributes, {
           pattern: /^https?:\/\//,
           attrs: {
@@ -146,6 +149,14 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    proxy: {
+      // 正则表达式写法
+      '^/api/.*': {
+        target: 'http://f5321.free.svipss.top',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
   },
 
   // https://github.com/antfu/vite-ssg
@@ -164,5 +175,8 @@ export default defineConfig({
     exclude: [
       'vue-demi',
     ],
+  },
+  build: {
+    sourcemap: true,
   },
 })

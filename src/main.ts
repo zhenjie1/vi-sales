@@ -8,11 +8,12 @@ import App from './App.vue'
 import 'virtual:windi-base.css'
 import 'virtual:windi-components.css'
 // your custom styles here
-import './styles/main.css'
+import '~/assets/css/main.scss'
 // windicss utilities should be the last style import
 import 'virtual:windi-utilities.css'
 // windicss devtools support (dev only)
 import 'virtual:windi-devtools'
+import UseArcoDesign from './plugins/arcoDesign'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -21,6 +22,7 @@ export const createApp = ViteSSG(
   App,
   { routes },
   (ctx) => {
+    UseArcoDesign(ctx.app)
     // install all modules under `modules/`
     Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
   },
