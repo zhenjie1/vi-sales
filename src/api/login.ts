@@ -10,6 +10,18 @@ export const getCode = () => useAxios<{
   dataPath: 'data.data',
 })
 
+type LoginTestParams = { a: number; b: number }
+type LoginTestResult = { data: { list: Data[]; total: number }; code: number }
+const logintest = () => useAxios<LoginTestParams, LoginTestResult>({
+  url: '/logintest',
+})
+
+const { start } = logintest()
+start({
+  a: 123,
+  b: 123,
+})
+
 export const login = () => useAxios({
   url: '/userLogin',
 })

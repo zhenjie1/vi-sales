@@ -13,7 +13,7 @@ type Fail<T> = (error: AxiosError<T>) => void
  * @param url
  * @param config
  */
-export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
+export function useAxios<P = Data, T = any>(config: Params): APIFetchReturn<P, T> {
   const response = shallowRef<AxiosResponse<T>>()
   const sourceData = ref<FetchResult<T>>()
   const data = computed<T>(() => getData(config, sourceData.value))
@@ -42,7 +42,7 @@ export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
     reject = rej
   })
 
-  const result: APIFetchReturn<T> = {
+  const result: APIFetchReturn<P, T> = {
     response,
     sourceData,
     data,
@@ -65,7 +65,7 @@ export function useAxios<T = any>(config: Params): APIFetchReturn<T> {
 
   readCache(config, result)
 
-  function start(params?: any): APIFetchReturn<T> {
+  function start(params: P): APIFetchReturn<T> {
     config.data = removeSurplusData(params) || config.data
     axios({ ...config, cancelToken: cancelToken.token })
       .then((r: any) => {
